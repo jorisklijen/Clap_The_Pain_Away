@@ -6,6 +6,7 @@ using System.IO.Ports;
 public class GameManager : MonoBehaviour
 {
     public static GameManager instance;
+    public static Player player;
     SerialPort port = new SerialPort("COM10", 9600, Parity.None, 8, StopBits.One);
 
     float distance;

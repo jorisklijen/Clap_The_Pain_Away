@@ -5,6 +5,7 @@ using UnityEngine;
 public class Player : MonoBehaviour
 {
     [SerializeField] float moveSpeed;
+    public int lives = 9;
     bool clapped;
     bool moved;
 
