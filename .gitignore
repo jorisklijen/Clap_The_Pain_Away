@@ -35,3 +35,7 @@ sysinfo.txt
 # Builds
 *.apk
 *.unitypackage
+
+# Custom
+*.meta
+!/Unity/ferdTheGame/Assets/Scenes/*.meta
