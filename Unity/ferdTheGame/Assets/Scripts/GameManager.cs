@@ -9,6 +9,7 @@ public class GameManager : MonoBehaviour
     public static Player player;
     SerialPort port = new SerialPort("COM10", 9600, Parity.None, 8, StopBits.One);
 
+
     float distance;
     public GameObject movePopup;
     public GameObject shootPopup;
@@ -31,5 +32,8 @@ public class GameManager : MonoBehaviour
         GUI.color = Color.black;
         GUI.Label(new Rect(10, 10, 300, 50), "Right sensor distance: " + IOManager.distanceRight);
         GUI.Label(new Rect(10, 30, 300, 50), "Left sensor distance: " + IOManager.distanceLeft);
+        GUI.Label(new Rect(10, 50, 300, 50), "Game Decibel level: " + IOManager.audioLevel);
+        GUI.Label(new Rect(10, 70, 300, 50), "Game Time: " + Time.time);
+
     }
 }

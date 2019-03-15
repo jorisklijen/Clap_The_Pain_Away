@@ -6,7 +6,7 @@ AnimationClip:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Live
+  m_Name: Clappo
   serializedVersion: 6
   m_Legacy: 0
   m_Compressed: 0
@@ -20,18 +20,18 @@ AnimationClip:
   m_PPtrCurves:
   - curve:
     - time: 0
-      value: {fileID: 21300000, guid: eb62d12ba02cee6468f3f8b4ef97de3c, type: 3}
+      value: {fileID: 21300000, guid: 5e5b9a0a98866bb4792b1c1c9338e7a6, type: 3}
+    - time: 0.083333336
+      value: {fileID: 21300000, guid: 6073bb9d43a5ead4a89f26b12e3786f5, type: 3}
     - time: 0.16666667
-      value: {fileID: 21300000, guid: 294ec98ed06502e4ea301ddcd9e7f20a, type: 3}
-    - time: 0.33333334
-      value: {fileID: 21300000, guid: b1f86e0e053332e4d9b8540594500286, type: 3}
-    - time: 0.5
-      value: {fileID: 21300000, guid: 294ec98ed06502e4ea301ddcd9e7f20a, type: 3}
+      value: {fileID: 21300000, guid: d0ceb00605aece445a501903cbc0dc78, type: 3}
+    - time: 0.25
+      value: {fileID: 21300000, guid: 54cca73b760e23f4f9bc010561ed6f61, type: 3}
     attribute: m_Sprite
     path: 
-    classID: 114
-    script: {fileID: -765806418, guid: f70555f144d8491a825f0804e09c671c, type: 3}
-  m_SampleRate: 6
+    classID: 212
+    script: {fileID: 0}
+  m_SampleRate: 12
   m_WrapMode: 0
   m_Bounds:
     m_Center: {x: 0, y: 0, z: 0}
@@ -40,22 +40,22 @@ AnimationClip:
     genericBindings:
     - serializedVersion: 2
       path: 0
-      attribute: 2015549526
-      script: {fileID: -765806418, guid: f70555f144d8491a825f0804e09c671c, type: 3}
-      typeID: 114
-      customType: 0
+      attribute: 0
+      script: {fileID: 0}
+      typeID: 212
+      customType: 23
       isPPtrCurve: 1
     pptrCurveMapping:
-    - {fileID: 21300000, guid: eb62d12ba02cee6468f3f8b4ef97de3c, type: 3}
-    - {fileID: 21300000, guid: 294ec98ed06502e4ea301ddcd9e7f20a, type: 3}
-    - {fileID: 21300000, guid: b1f86e0e053332e4d9b8540594500286, type: 3}
-    - {fileID: 21300000, guid: 294ec98ed06502e4ea301ddcd9e7f20a, type: 3}
+    - {fileID: 21300000, guid: 5e5b9a0a98866bb4792b1c1c9338e7a6, type: 3}
+    - {fileID: 21300000, guid: 6073bb9d43a5ead4a89f26b12e3786f5, type: 3}
+    - {fileID: 21300000, guid: d0ceb00605aece445a501903cbc0dc78, type: 3}
+    - {fileID: 21300000, guid: 54cca73b760e23f4f9bc010561ed6f61, type: 3}
   m_AnimationClipSettings:
     serializedVersion: 2
     m_AdditiveReferencePoseClip: {fileID: 0}
     m_AdditiveReferencePoseTime: 0
     m_StartTime: 0
-    m_StopTime: 0.6666667
+    m_StopTime: 0.33333334
     m_OrientationOffsetY: 0
     m_Level: 0
     m_CycleOffset: 0
@@ -74,4 +74,11 @@ AnimationClip:
   m_EulerEditorCurves: []
   m_HasGenericRootTransform: 0
   m_HasMotionFloatCurves: 0
-  m_Events: []
+  m_Events:
+  - time: 0.25
+    functionName: ResetClapper
+    data: 
+    objectReferenceParameter: {fileID: 0}
+    floatParameter: 0
+    intParameter: 0
+    messageOptions: 0

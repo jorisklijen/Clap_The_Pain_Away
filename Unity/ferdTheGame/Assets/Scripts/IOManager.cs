@@ -22,6 +22,10 @@ public class IOManager : MonoBehaviour
     public static float distanceRight;
     public static float audioLevel;
 
+    AudioClip microphoneInput;
+    float sensitivity;
+    bool microphoneInitialised;
+
     string readValue;
 
     private void Awake()
@@ -37,7 +41,14 @@ public class IOManager : MonoBehaviour
 
     private void Start()
     {
-        Debug.Log(portThread.ThreadState);
+        if(Microphone.devices.Length>0)
+        {
+            Debug.Log("Microphone found");
+            microphoneInput = Microphone.Start(Microphone.devices[0], true, 999, 44100);
+            microphoneInitialised = true;
+        }
+
+        //Debug.Log(portThread.ThreadState);
         port.RtsEnable = true;
         port.ReadTimeout = 700;
         port.Open();
@@ -48,6 +59,26 @@ public class IOManager : MonoBehaviour
 
     private void Update()
     {
+        if(microphoneInitialised)
+        {
+            int dec = 128;
+            float[] waveData = new float[dec];
+            int micPosition = Microphone.GetPosition(null) - (dec + 1);
+            microphoneInput.GetData(waveData, micPosition);
+
+            float levelMax = 0;
+            for (int i = 0; i < dec; i++)
+            {
+                float wavePeak = waveData[i] * waveData[i];
+                if(levelMax < wavePeak)
+                {
+                    levelMax = wavePeak;
+                }
+            }
+            audioLevel = (float)Math.Round(Mathf.Sqrt(Mathf.Sqrt(levelMax)) * 100f, 2);
+            //Debug.Log(audioLevel);
+        }
+
         if(instance.readValue != "")
         {
             vec3 = readValue.Split(',');
@@ -72,7 +103,7 @@ public class IOManager : MonoBehaviour
             try
             {
                 instance.readValue = port.ReadLine();
-                Debug.Log(instance.readValue);
+                //Debug.Log(instance.readValue);
             }
             catch (Exception)
             {
