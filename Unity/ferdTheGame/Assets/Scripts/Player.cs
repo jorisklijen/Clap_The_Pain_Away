@@ -54,17 +54,22 @@ public class Player : MonoBehaviour
             }
         }
 
-        if(IOManager.audioLevel > desiredLevel && !clapped)
+        if(Input.GetKeyDown(KeyCode.J) || IOManager.audioLevel > desiredLevel && !clapped)
         {
-            clapped = true;
-            PopUpCheck();
-            anim.SetTrigger("Clap");
-            Debug.Log("Clapping!");
+            Clap();
         }
     }
 
     void ResetClapper()
     {
         clapped = false;
+    }
+
+    void Clap()
+    {
+        clapped = true;
+        PopUpCheck();
+        anim.SetTrigger("Clap");
+        Debug.Log("Clapping!");
     }
 }

@@ -8,7 +8,8 @@ public class GameManager : MonoBehaviour
     public static GameManager instance;
     public static Player player;
     SerialPort port = new SerialPort("COM10", 9600, Parity.None, 8, StopBits.One);
-
+    public static Balloon[] lives;
+    [SerializeField] Transform lifeHolder;
 
     float distance;
     public GameObject movePopup;
@@ -26,6 +27,12 @@ public class GameManager : MonoBehaviour
     }
     #endregion
 
+    private void Start()
+    {
+        player = GameObject.Find("Player").GetComponent<Player>();
+        lives = lifeHolder.GetComponentsInChildren<Balloon>();
+    }
+
     private void OnGUI()
     {
         // There was a comment here, but I no longer know what it said /shrug
@@ -34,6 +41,5 @@ public class GameManager : MonoBehaviour
         GUI.Label(new Rect(10, 30, 300, 50), "Left sensor distance: " + IOManager.distanceLeft);
         GUI.Label(new Rect(10, 50, 300, 50), "Game Decibel level: " + IOManager.audioLevel);
         GUI.Label(new Rect(10, 70, 300, 50), "Game Time: " + Time.time);
-
     }
 }
