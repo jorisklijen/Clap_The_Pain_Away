@@ -32,7 +32,7 @@ public class Player : MonoBehaviour
     {
         if(IOManager.distanceLeft >= -20)
         {
-            if (!moved && Time.time > 5)
+            if (!moved && Time.time > 1)
                 moved = true;
 
             if(!(transform.position.x <= -10))
@@ -44,7 +44,7 @@ public class Player : MonoBehaviour
 
         if(IOManager.distanceRight <= 20 )
         {
-            if (!moved && Time.time > 5)
+            if (!moved && Time.time > 1)
                 moved = true;
 
             if(!(transform.position.x >= 10))
@@ -57,6 +57,7 @@ public class Player : MonoBehaviour
         if(IOManager.audioLevel > desiredLevel && !clapped)
         {
             clapped = true;
+            PopUpCheck();
             anim.SetTrigger("Clap");
             Debug.Log("Clapping!");
         }
