@@ -10,7 +10,7 @@ int distance = 0;
 int duration = 0;
 
 CRGB leds[LED_COUNT];
-void setup() 
+void setup()
 {
   FastLED.addLeds<WS2812, DATA_PIN>(leds, LED_COUNT);
   pinMode(ultraLeftTrig, OUTPUT);
@@ -31,14 +31,14 @@ int UltraSonicSensor(int triggerSensor, int echoSensor) {
   return distance;
 }
 
-void loop() 
+void loop()
 {
   for(int i = 0; i < LED_COUNT; i++)
   {
-    leds[i].setRGB(0, 255, 0); // GRB (nobody knows why)
+    leds[i].setRGB(0, 255, 0); // GRB (nobody knows why) //joris hier idd raar dat t GRB ipv RGb heeft. maar na wat onderzeok achter gekoomen dat er geen standaard is voor ledstrips en dat de fabrikant zelg bapaalt in welke volgorde de letjes word geplaatst. 
   }
   FastLED.show();
-  
+
   Serial.flush();
   Serial.print(UltraSonicSensor(ultraLeftTrig, ultraLeftEcho)); //distance left
   Serial.print(",");
