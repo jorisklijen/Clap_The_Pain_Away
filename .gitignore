@@ -39,3 +39,4 @@ sysinfo.txt
 # Custom
 *.meta
 !/Unity/ferdTheGame/Assets/Scenes/*.meta
+!/Unity/ferdTheGame/Assets/Resources/*.meta
