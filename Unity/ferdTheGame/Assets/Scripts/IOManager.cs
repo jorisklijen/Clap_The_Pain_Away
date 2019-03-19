@@ -14,6 +14,7 @@ public class IOManager : MonoBehaviour
     public string portName;
     public static IOManager instance;
     Thread portThread = new Thread(Read);
+    Thread lightThread = new Thread(LEDRunner);
 
     static SerialPort port = new SerialPort("", 115200); //devicename, bautrate
     static string[] returnValues;
@@ -83,6 +84,10 @@ public class IOManager : MonoBehaviour
         }
 
         GameManager.instance.gameReady = true;
+
+        if (!lightThread.IsAlive)
+            lightThread.Start();
+
         yield return null;
     }
 
@@ -124,24 +129,8 @@ public class IOManager : MonoBehaviour
 
                 distanceLeft = float.Parse(returnValues[0]) * -1;
                 distanceRight = float.Parse(returnValues[1]);
-
-                LEDLights.Clear();
-                for (int j = 2; j < returnValues.Length; j++)
-                {
-                    string[] ledValues = returnValues[j].Split('/');
-
-                    LEDLight light = new LEDLight();
-                    light.r = int.Parse(ledValues[0]);
-                    light.g = int.Parse(ledValues[1]);
-                    light.b = int.Parse(ledValues[2]);
-
-                    LEDLights.Add(light);
-                    Debug.Log("Added a new light to lights");
-
-                }
             }
         }
-        
     }
 
     public static void EditLedStatus(int index, bool status)
@@ -160,9 +149,36 @@ public class IOManager : MonoBehaviour
             {
                 instance.readValue = port.ReadLine();
             }
-            catch (Exception)
+            catch (Exception e)
             {
                 //Debug.LogError("Reading failed");
+            }
+        }
+    }
+
+    private static void LEDRunner(object obj)
+    {
+        while (true)
+        {
+            try
+            {
+                instance.LEDLights.Clear();
+                for (int j = 2; j < returnValues.Length; j++)
+                {
+                    string[] ledValues = returnValues[j].Split('/');
+
+                    LEDLight light = new LEDLight();
+                    light.r = int.Parse(ledValues[0]);
+                    light.g = int.Parse(ledValues[1]);
+                    light.b = int.Parse(ledValues[2]);
+
+                    instance.LEDLights.Add(light);
+                    Debug.Log("Added a new light to lights");
+                }
+            }
+            catch (Exception e)
+            {
+                // Couldn't add new lights;
             }
         }
     }
