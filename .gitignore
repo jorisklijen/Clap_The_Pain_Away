@@ -37,6 +37,6 @@ sysinfo.txt
 *.unitypackage
 
 # Custom
-*.meta
-!/Unity/ferdTheGame/Assets/Scenes/*.meta
-!/Unity/ferdTheGame/Assets/Resources/*.meta
+#*.meta
+#!/Unity/ferdTheGame/Assets/Scenes/*.meta
+#!/Unity/ferdTheGame/Assets/Resources/*.meta
