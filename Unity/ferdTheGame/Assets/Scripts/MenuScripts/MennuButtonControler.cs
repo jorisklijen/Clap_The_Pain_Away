@@ -18,13 +18,13 @@ public class MennuButtonControler : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-		if (Input.GetAxisRaw("Vertical") != 0)
+		if ((Input.GetAxisRaw("Vertical") != 0))
 		{
 			if (!keyDown)
 			{
 
 				//hiero input voor de sensors
-				if (Input.GetAxisRaw("Vertical") < 0)
+				if (Input.GetAxisRaw("Vertical") < 0  /*(IOManager.distanceLeft >= -20)*/)
 				{
 					if (index < maxIndex)
 					{
@@ -34,11 +34,9 @@ public class MennuButtonControler : MonoBehaviour
 					{
 						index = 0;
 					}
-
-
 				}
 				//hiero input voor de sensors
-				else if (Input.GetAxisRaw("Vertical") > 0)
+				else if (Input.GetAxisRaw("Vertical") > 0 /*(IOManager.distanceRight <= 20)*/)
 				{
 					if (index > 0)
 					{

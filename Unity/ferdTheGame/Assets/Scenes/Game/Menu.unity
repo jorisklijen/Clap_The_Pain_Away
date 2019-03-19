@@ -3472,6 +3472,21 @@ PrefabInstance:
       propertyPath: animatorFunctions
       value: 
       objectReference: {fileID: 366893302}
+    - target: {fileID: 4124143806103363383, guid: 3316d28924117454a894b0c4a8e086f6,
+        type: 3}
+      propertyPath: m_Color.r
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4124143806103363383, guid: 3316d28924117454a894b0c4a8e086f6,
+        type: 3}
+      propertyPath: m_Color.g
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4124143806103363383, guid: 3316d28924117454a894b0c4a8e086f6,
+        type: 3}
+      propertyPath: m_Color.b
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3316d28924117454a894b0c4a8e086f6, type: 3}
 --- !u!1 &2139402527 stripped
