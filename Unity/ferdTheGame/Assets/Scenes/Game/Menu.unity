@@ -2066,8 +2066,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   index: 0
+  keyDown: 0
   maxIndex: 4
   audioSource: {fileID: 0}
+  sec: 0.5
 --- !u!1 &1741507631
 GameObject:
   m_ObjectHideFlags: 0

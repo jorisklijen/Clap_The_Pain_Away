@@ -43,8 +43,11 @@ void loop()
   Serial.print(UltraSonicSensor(ultraLeftTrig, ultraLeftEcho)); //distance left
   Serial.print(",");
   Serial.print(UltraSonicSensor(ultraRightTrig, ultraRightEcho)); // distance right
-  Serial.print(",");
-  Serial.print(82); // audio decibel level
+  for(int i = 0; i < LED_COUNT; i++)
+  {
+    Serial.print(",");
+    Serial.print(leds[i]);  
+  }
   Serial.println();
 
   // add additional lines for heat

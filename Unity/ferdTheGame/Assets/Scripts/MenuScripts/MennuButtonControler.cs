@@ -34,7 +34,7 @@ public class MennuButtonControler : MonoBehaviour
 				yield return new WaitForSeconds(sec);
 			}
 			//hiero input voor de sensors
-			if (Input.GetKeyDown(KeyCode.DownArrow) || (IOManager.distanceRight <= 20))
+			if (Input.GetKeyDown(KeyCode.UpArrow) || (IOManager.distanceRight <= 20))
 			{
 				if (index > 0)
 					index--;
