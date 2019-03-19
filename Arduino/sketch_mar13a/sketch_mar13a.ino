@@ -3,7 +3,7 @@ int ultraLeftTrig = 2;
 int ultraLeftEcho = 3;
 int ultraRightTrig = 4;
 int ultraRightEcho = 5;
-#define LED_COUNT 10
+#define LED_COUNT 11
 #define DATA_PIN 7
 
 int distance = 0;

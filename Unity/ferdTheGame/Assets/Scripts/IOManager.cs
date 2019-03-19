@@ -57,7 +57,7 @@ public class IOManager : MonoBehaviour
             portThread.Start();
     }
 
-    private void Update()
+    private void LateUpdate()
     {
         if(microphoneInitialised)
         {
@@ -111,7 +111,6 @@ public class IOManager : MonoBehaviour
             }
         }
     }
-
 
     private void OnApplicationQuit()
     {

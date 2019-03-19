@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using System.IO.Ports;
 
 public class GameManager : MonoBehaviour
@@ -29,8 +30,11 @@ public class GameManager : MonoBehaviour
 
     private void Start()
     {
-        player = GameObject.Find("Player").GetComponent<Player>();
-        lives = lifeHolder.GetComponentsInChildren<Balloon>();
+        if(SceneManager.GetActiveScene().name == "GarbageScene") // Change for live version
+        {
+            player = GameObject.Find("Player").GetComponent<Player>();
+            lives = lifeHolder.GetComponentsInChildren<Balloon>();
+        }
     }
 
     private void OnGUI()
