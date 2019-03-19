@@ -35,6 +35,7 @@ public class Balloon : MonoBehaviour
     void Die()
     {
         GameManager.instance.player.lives -= 1;
+        IOManager.EditLedStatus(index, false);
         Instantiate(vfx, transform.position, Quaternion.identity);
         //Time.timeScale += 0.1f;
         Destroy(gameObject);
