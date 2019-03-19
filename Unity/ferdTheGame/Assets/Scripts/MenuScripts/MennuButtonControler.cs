@@ -8,23 +8,56 @@ public class MennuButtonControler : MonoBehaviour
 	[SerializeField] bool keyDown;
 	[SerializeField] int maxIndex;
 	public AudioSource audioSource;
+	[Space(20f)]
+	public float sec = 0.5f;
+
 
 	// Start is called before the first frame update
 	void Start()
     {
 		audioSource = GetComponent<AudioSource>();
+		StartCoroutine(MenuMove());
     }
 
+	IEnumerator MenuMove()
+	{
+		while (true)
+		{
+			//hiero input voor de sensors
+			if (Input.GetKeyDown(KeyCode.DownArrow) || (IOManager.distanceLeft >= -20))
+			{
+				if (index < maxIndex)
+					index++;
+				else
+					index = 0;
+				//return;
+				yield return new WaitForSeconds(sec);
+			}
+			//hiero input voor de sensors
+			if (Input.GetKeyDown(KeyCode.DownArrow) || (IOManager.distanceRight <= 20))
+			{
+				if (index > 0)
+					index--;
+				else
+					index = maxIndex;
+				//return;
+				yield return new WaitForSeconds(sec);
+			}
+			keyDown = true;
+			yield return null;
+		}
+		//yield return new WaitForSeconds(.1f);
+	}
+
     // Update is called once per frame
-    void Update()
+    void nee()
     {
 		if ((Input.GetAxisRaw("Vertical") != 0))
 		{
 			if (!keyDown)
 			{
-
 				//hiero input voor de sensors
-				if (Input.GetAxisRaw("Vertical") < 0 ||(IOManager.distanceLeft >= -20))
+				if (Input.GetKeyDown(KeyCode.DownArrow) || (IOManager.distanceLeft >= -20))
 				{
 					if (index < maxIndex)
 					{
@@ -34,9 +67,10 @@ public class MennuButtonControler : MonoBehaviour
 					{
 						index = 0;
 					}
+					//return;
 				}
 				//hiero input voor de sensors
-				else if (Input.GetAxisRaw("Vertical") > 0 ||(IOManager.distanceRight <= 20))
+				else if (Input.GetKeyDown(KeyCode.DownArrow) || (IOManager.distanceRight <= 20))
 				{
 					if (index > 0)
 					{
@@ -46,9 +80,11 @@ public class MennuButtonControler : MonoBehaviour
 					{
 						index = maxIndex;
 					}
+					//return;
 				}
 				keyDown = true;
 			}
+			keyDown = false;
 		}
 		else {
 			keyDown = false;
