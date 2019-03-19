@@ -8,6 +8,8 @@ public class MenuButton : MonoBehaviour
 	[SerializeField] Animator animator;
 	[SerializeField] AnimatorFunctions animatorFunctions;
 	[SerializeField] int thisIndex;
+	[Space]
+	public float desiredLevel = 70;
 
 
 	// Update is called once per frame
@@ -18,7 +20,7 @@ public class MenuButton : MonoBehaviour
 			animator.SetBool("isSelected", true);
 
 			//hiero klap regestratie
-			if (Input.GetAxisRaw("Submit") == 1)
+			if (Input.GetAxisRaw("Submit") == 1 || IOManager.audioLevel > desiredLevel)
 			{
 				animator.SetBool("isPressed", true);
 			}

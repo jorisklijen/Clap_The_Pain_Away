@@ -24,7 +24,7 @@ public class MennuButtonControler : MonoBehaviour
 			{
 
 				//hiero input voor de sensors
-				if (Input.GetAxisRaw("Vertical") < 0  /*(IOManager.distanceLeft >= -20)*/)
+				if (Input.GetAxisRaw("Vertical") < 0 ||(IOManager.distanceLeft >= -20))
 				{
 					if (index < maxIndex)
 					{
@@ -36,7 +36,7 @@ public class MennuButtonControler : MonoBehaviour
 					}
 				}
 				//hiero input voor de sensors
-				else if (Input.GetAxisRaw("Vertical") > 0 /*(IOManager.distanceRight <= 20)*/)
+				else if (Input.GetAxisRaw("Vertical") > 0 ||(IOManager.distanceRight <= 20))
 				{
 					if (index > 0)
 					{
