@@ -16,7 +16,7 @@ public class IOManager : MonoBehaviour
     Thread portThread = new Thread(Read);
 
     static SerialPort port = new SerialPort("", 115200); //devicename, bautrate
-    static string[] vec3;
+    static string[] returnValues;
 
     public static float distanceLeft;
     public static float distanceRight;
@@ -26,7 +26,9 @@ public class IOManager : MonoBehaviour
     float sensitivity;
     bool microphoneInitialised;
 
-    string readValue;
+    public string readValue;
+
+    public List<LEDLight> LEDLights = new List<LEDLight>();
 
     private void Awake()
     {
@@ -55,45 +57,99 @@ public class IOManager : MonoBehaviour
 
         if (!portThread.IsAlive)
             portThread.Start();
+
+        StartCoroutine(StartGame());
     }
 
-    private void LateUpdate()
+    IEnumerator StartGame()
     {
-        if(microphoneInitialised)
-        {
-            int dec = 128;
-            float[] waveData = new float[dec];
-            int micPosition = Microphone.GetPosition(null) - (dec + 1);
-            microphoneInput.GetData(waveData, micPosition);
+        yield return new WaitForSeconds(0.5f);
 
-            float levelMax = 0;
-            for (int i = 0; i < dec; i++)
-            {
-                float wavePeak = waveData[i] * waveData[i];
-                if(levelMax < wavePeak)
-                {
-                    levelMax = wavePeak;
-                }
-            }
-            audioLevel = (float)Math.Round(Mathf.Sqrt(Mathf.Sqrt(levelMax)) * 100f, 2);
-            //Debug.Log(audioLevel);
+        for (int i = 0; i < GameManager.instance.lives.Length; i++)
+        {
+            Debug.Log("editing light status");
+            EditLedStatus(i + 1, false);
+            yield return new WaitForSeconds(0.1275f);
+
         }
 
-        if(instance.readValue != "")
+        yield return new WaitForSeconds(1f);
+
+        for (int i = 0; i < GameManager.instance.lives.Length; i++)
         {
-            vec3 = readValue.Split(',');
-            for (int i = 0; i < vec3.Length; i++)
+            Debug.Log("moving through the lights to enable them");
+            EditLedStatus(i + 1, true);
+            yield return new WaitForSeconds(1f);
+        }
+
+        GameManager.instance.gameReady = true;
+        yield return null;
+    }
+
+    private void Update()
+    {
+        if(GameManager.instance.gameReady)
+        {
+            if (microphoneInitialised)
             {
-                if (vec3[i] == "")
+                int dec = 128;
+                float[] waveData = new float[dec];
+                int micPosition = Microphone.GetPosition(null) - (dec + 1);
+                microphoneInput.GetData(waveData, micPosition);
+
+                float levelMax = 0;
+                for (int i = 0; i < dec; i++)
                 {
-                    Debug.Log("Arduino broke!");
-                    return;
+                    float wavePeak = waveData[i] * waveData[i];
+                    if (levelMax < wavePeak)
+                    {
+                        levelMax = wavePeak;
+                    }
                 }
+                audioLevel = (float)Math.Round(Mathf.Sqrt(Mathf.Sqrt(levelMax)) * 100f, 2);
+                //Debug.Log(audioLevel);
             }
 
-            distanceLeft = float.Parse(vec3[0]) * -1;
-            distanceRight = float.Parse(vec3[1]);
+            if (instance.readValue != "")
+            {
+                returnValues = readValue.Split(',');
+                for (int i = 0; i < returnValues.Length; i++)
+                {
+                    if (returnValues[i] == "")
+                    {
+                        Debug.Log("Arduino broke!");
+                        return;
+                    }
+                }
+
+                distanceLeft = float.Parse(returnValues[0]) * -1;
+                distanceRight = float.Parse(returnValues[1]);
+
+                LEDLights.Clear();
+                for (int j = 2; j < returnValues.Length; j++)
+                {
+                    string[] ledValues = returnValues[j].Split('/');
+
+                    LEDLight light = new LEDLight();
+                    light.r = int.Parse(ledValues[0]);
+                    light.g = int.Parse(ledValues[1]);
+                    light.b = int.Parse(ledValues[2]);
+
+                    LEDLights.Add(light);
+                    Debug.Log("Added a new light to lights");
+
+                }
+            }
         }
+        
+    }
+
+    public static void EditLedStatus(int index, bool status)
+    {
+        if(status)
+            port.Write(index + ", enable");
+        if(!status)
+            port.Write(index + ", disable");
     }
 
     private static void Read(object obj)
@@ -103,7 +159,6 @@ public class IOManager : MonoBehaviour
             try
             {
                 instance.readValue = port.ReadLine();
-                //Debug.Log(instance.readValue);
             }
             catch (Exception)
             {
@@ -116,4 +171,12 @@ public class IOManager : MonoBehaviour
     {
         port.Close();
     }
+}
+
+[Serializable]
+public class LEDLight
+{
+    public int r;
+    public int g;
+    public int b;
 }
