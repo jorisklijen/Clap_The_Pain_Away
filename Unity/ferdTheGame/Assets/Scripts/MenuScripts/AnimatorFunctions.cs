@@ -10,13 +10,9 @@ public class AnimatorFunctions : MonoBehaviour
 	void PlaySound(AudioClip whichSound)
 	{
 		if (!disableOnce)
-		{
 			mennuButtonControler.audioSource.PlayOneShot(whichSound);
-		}
 		else
-		{
 			disableOnce = false;
-		}
 	}
 
 }

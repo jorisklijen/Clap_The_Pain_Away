@@ -24,33 +24,33 @@ public class MennuButtonControler : MonoBehaviour
 		while (true)
 		{
 			//hiero input voor de sensors
-			if (Input.GetKeyDown(KeyCode.DownArrow) || (IOManager.distanceLeft >= -20))
+			if (Input.GetKeyDown(KeyCode.DownArrow)||(IOManager.distanceLeft >= -20))
 			{
 				if (index < maxIndex)
 					index++;
 				else
 					index = 0;
-				//return;
 				yield return new WaitForSeconds(sec);
 			}
 			//hiero input voor de sensors
-			if (Input.GetKeyDown(KeyCode.UpArrow) || (IOManager.distanceRight <= 20))
+			if (Input.GetKeyDown(KeyCode.UpArrow)||(IOManager.distanceRight <= 20))
 			{
 				if (index > 0)
 					index--;
 				else
 					index = maxIndex;
-				//return;
 				yield return new WaitForSeconds(sec);
 			}
 			keyDown = true;
 			yield return null;
 		}
-		//yield return new WaitForSeconds(.1f);
 	}
 
     // Update is called once per frame
-    void nee()
+
+
+
+/*    void nee()
     {
 		if ((Input.GetAxisRaw("Vertical") != 0))
 		{
@@ -60,34 +60,25 @@ public class MennuButtonControler : MonoBehaviour
 				if (Input.GetKeyDown(KeyCode.DownArrow) || (IOManager.distanceLeft >= -20))
 				{
 					if (index < maxIndex)
-					{
 						index++;
-					}
 					else
-					{
 						index = 0;
-					}
 					//return;
 				}
 				//hiero input voor de sensors
 				else if (Input.GetKeyDown(KeyCode.DownArrow) || (IOManager.distanceRight <= 20))
 				{
 					if (index > 0)
-					{
 						index--;
-					}
 					else
-					{
 						index = maxIndex;
-					}
 					//return;
 				}
 				keyDown = true;
 			}
 			keyDown = false;
 		}
-		else {
+		else 
 			keyDown = false;
-		}
-    }
+    } */
 }
