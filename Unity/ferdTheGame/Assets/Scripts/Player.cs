@@ -19,9 +19,9 @@ public class Player : MonoBehaviour
 
     void PopUpCheck()
     {
-        if (moved && GameManager.instance.movePopup != null)
+        if (moved && GameManager.instance.movePopup != null && GameManager.instance.gameReady)
             Destroy(GameManager.instance.movePopup);
-        if (clapped && GameManager.instance.shootPopup != null)
+        if (clapped && GameManager.instance.shootPopup != null && GameManager.instance.gameReady)
             Destroy(GameManager.instance.shootPopup);
 
         if (clapped && moved)
@@ -57,6 +57,22 @@ public class Player : MonoBehaviour
         if(Input.GetKeyDown(KeyCode.J) || IOManager.audioLevel > desiredLevel && !clapped)
         {
             Clap();
+            RaycastHit hit;
+            if (Physics.Raycast(transform.position, Vector3.up * 100, out hit, 50))
+            {
+                Debug.Log("Firing raycast");
+                if (hit.transform.CompareTag("Enemy"))
+                {
+                    Debug.Log("I hit an enemy!");
+                }
+            }
+        }
+
+        Debug.DrawRay(transform.position, Vector3.up * 50, Color.blue, 1);
+
+        if(IOManager.audioLevel > 90)
+        {
+            StartCoroutine(IOManager.instance.TakePhoto());
         }
     }
 
@@ -68,7 +84,11 @@ public class Player : MonoBehaviour
     void Clap()
     {
         clapped = true;
-        PopUpCheck();
+        if(GameManager.instance.shootPopup)
+        {
+            PopUpCheck();
+        }
+
         anim.SetTrigger("Clap");
         Debug.Log("Clapping!");
     }
