@@ -134,11 +134,6 @@ public class IOManager : MonoBehaviour
                 distanceRight = float.Parse(returnValues[1]);
             }
         }
-        
-        if(Input.GetKeyDown(KeyCode.Space))
-        {
-            StartCoroutine(TakePhoto());
-        }
     }
 
     public static void EditLedStatus(int index, bool status)
