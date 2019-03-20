@@ -21,9 +21,7 @@ public class MenuButton : MonoBehaviour
 
 			//hiero klap regestratie
 			if (Input.GetAxisRaw("Submit") == 1 || IOManager.audioLevel > desiredLevel)
-			{
 				animator.SetBool("isPressed", true);
-			}
 			else if (animator.GetBool("isPressed"))
 			{
 				animator.SetBool("isPressed", false);
@@ -31,8 +29,6 @@ public class MenuButton : MonoBehaviour
 			}
 		}
 		else
-		{
 			animator.SetBool("isSelected", false);
-		}
 	}
 }
