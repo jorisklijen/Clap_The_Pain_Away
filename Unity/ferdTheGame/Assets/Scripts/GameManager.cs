@@ -11,12 +11,20 @@ public class GameManager : MonoBehaviour
     SerialPort port = new SerialPort("COM10", 9600, Parity.None, 8, StopBits.One);
     public Balloon[] lives;
     [SerializeField] Transform lifeHolder;
+    public enum GamePhase { DEFAULT, BOSS1, BOSS2 }
+    public GamePhase gamePhase;
 
     float distance;
     public GameObject movePopup;
     public GameObject shootPopup;
 
+    [Header("Camera and Game")]
+    [SerializeField] float bossPhase1FOV = 9;
+    [SerializeField] float bossPhase2FOV = 9;
     public bool gameReady;
+
+    private Camera cam;
+    float fov = 7;
 
     #region Singleton Pattern design
     private void Awake()
@@ -32,10 +40,41 @@ public class GameManager : MonoBehaviour
 
     private void Start()
     {
-        if(SceneManager.GetActiveScene().name == "GarbageScene") // Change for live version
+        if (SceneManager.GetActiveScene().name == "GarbageScene") // Change for live version
         {
             player = GameObject.Find("Player").GetComponent<Player>();
             lives = lifeHolder.GetComponentsInChildren<Balloon>();
+        }
+
+        cam = Camera.main;
+        fov = cam.orthographicSize;
+
+        SceneManager.activeSceneChanged += (Scene arg0, Scene arg1) => {
+            Debug.Log("Scene changed");
+            cam = Camera.main;
+            fov = cam.orthographicSize;
+        };
+
+        InvokeRepeating("UpdateGamePhase", 0, 0.05f);
+    }
+
+
+    void UpdateGamePhase()
+    {
+        switch(gamePhase)
+        {
+            case GamePhase.DEFAULT:
+                {
+                    cam.orthographicSize = Mathf.MoveTowards(cam.orthographicSize, fov, Time.deltaTime);
+                    cam.transform.position = new Vector3(cam.transform.position.x, Mathf.MoveTowards(cam.transform.position.y, 1 ,Time.deltaTime), cam.transform.position.z);
+                    break;
+                }
+            case GamePhase.BOSS1:
+                {
+                    cam.orthographicSize = Mathf.MoveTowards(cam.orthographicSize, bossPhase1FOV, Time.deltaTime);
+                    cam.transform.position = new Vector3(cam.transform.position.x, Mathf.MoveTowards(cam.transform.position.y, 3, Time.deltaTime), cam.transform.position.z);
+                    break;
+                }
         }
     }
 
@@ -48,5 +87,10 @@ public class GameManager : MonoBehaviour
         GUI.Label(new Rect(10, 50, 300, 50), "Game Decibel level: " + IOManager.audioLevel);
         //GUI.Label(new Rect(10, 70, 300, 50), "Game Time: " + Time.time);
         GUI.Label(new Rect(10, 70, 1000, 50), "Receive value:" + IOManager.instance.readValue);
+    }
+
+    public static void EnterPhase(int phaseIndex)
+    {
+        instance.gamePhase = (GamePhase)phaseIndex;
     }
 }
