@@ -8,6 +8,9 @@ public class PhaseManager : MonoBehaviour {
     [Serializable]
     public class Phase {
         public Color backgroundColor;
+
+        // If the duration is too short it may cause issues with back-to-back transitions
+        [Range(5.0f, 3600.0f)]
         public float phaseDuration;
     }
 
@@ -17,7 +20,7 @@ public class PhaseManager : MonoBehaviour {
     [SerializeField]
     private Sprite backgroundTransition;
 
-    [SerializeField]
+    [SerializeField, Range(1.0f, 148.0f)]
     private float scrollSpeed;
 
     [SerializeField]
@@ -55,15 +58,13 @@ public class PhaseManager : MonoBehaviour {
         // If there already is an instance, place it above it
         if (bgInstances.Count > 0) {
             float newY = 0.0f;
-
             if (!prevWasShift) {
                 newY = bgInstances[bgInstances.Count - 1].transform.position.y;
             } else {
-                // Don't use the phase shift Y because it's larger than the solid bg
                 newY = bgInstances[bgInstances.Count - 2].transform.position.y;
                 newY += background.bounds.extents.y * 2.0f;
             }
-            
+                        
             if (phaseShift) {
                 newY += backgroundTransition.bounds.extents.y + background.bounds.extents.y;
             } else {
@@ -71,14 +72,15 @@ public class PhaseManager : MonoBehaviour {
             }
 
             float newZ = 0.0f;
-            if (prevWasShift) {
-                newZ = bgInstances[bgInstances.Count - 1].transform.position.z + 1.0f;
-            } else if (phaseShift) {
+            if (phaseShift) {
                 newZ = -1.0f;
             }
 
             obj.transform.position = new Vector3(0.0f, newY, newZ);
         }
+
+        // Back-to-back phases create gaps in the bg
+        Debug.Assert(!(prevWasShift && phaseShift), "Back-to-back phases are not allowed! Try increasing the phase duration.");
 
         prevWasShift = phaseShift;
         bgInstances.Add(obj);
