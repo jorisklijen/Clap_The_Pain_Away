@@ -9,13 +9,24 @@ public class Player : MonoBehaviour
     public int lives = 9;
     bool clapped;
     bool moved;
-    [SerializeField] float desiredLevel = 70;
+    [Header("Dev settings")]
     [SerializeField] bool allowPictureTaking;
+    [SerializeField] float desiredLevel = 70;
+    [SerializeField] float rayWidth = 10;
+
+    int boundsHorizontal;
 
     private void Start()
     {
         InvokeRepeating("PopUpCheck", 1, 1f);
+        InvokeRepeating("UpdateBounds", 1, 0.05f);
         anim = GetComponent<Animator>();
+    }
+
+    void UpdateBounds()
+    {
+        boundsHorizontal = IOManager.GetScreenBoundsInWorldSpace()[0] - 2;
+        //calculate horizontal bounds using a IOManager function that returns a int array, use element 0(horizontal) and take off 2 for an offset to make sure the player fits.
     }
 
     void PopUpCheck()
@@ -31,12 +42,14 @@ public class Player : MonoBehaviour
 
     void Update()
     {
+
+
         if(IOManager.distanceLeft >= -20)
         {
-            if (!moved && Time.time > 1)
+            if (!moved && GameManager.instance.gameReady)
                 moved = true;
 
-            if(!(transform.position.x <= -10))
+            if(!(transform.position.x <= boundsHorizontal * -1))
             {
                 transform.position += new Vector3(IOManager.distanceLeft * (moveSpeed / 10) * Time.deltaTime, 0);
                 //Debug.Log("Player move left!");
@@ -45,10 +58,10 @@ public class Player : MonoBehaviour
 
         if(IOManager.distanceRight <= 20 )
         {
-            if (!moved && Time.time > 1)
+            if (!moved && GameManager.instance.gameReady)
                 moved = true;
 
-            if(!(transform.position.x >= 10))
+            if(!(transform.position.x >= boundsHorizontal))
             {
                 transform.position += new Vector3(IOManager.distanceRight * (moveSpeed / 10) * Time.deltaTime, 0);
                 //Debug.Log("Player move right!");
@@ -58,20 +71,9 @@ public class Player : MonoBehaviour
         if(Input.GetKeyDown(KeyCode.J) || IOManager.audioLevel > desiredLevel && !clapped)
         {
             Clap();
-            RaycastHit2D hit = Physics2D.Raycast(transform.position, Vector2.up, 10);
-            if (hit.collider != null)
-            {
-                if (hit.transform.CompareTag("Enemy"))
-                {
-                    Debug.Log("I hit an enemy!");
-                    Destroy(hit.transform.gameObject);
-                }
-            }
         }
 
-        Debug.DrawRay(transform.position, Vector3.up * 50, Color.blue, 1);
-
-        if(IOManager.audioLevel > 90 && allowPictureTaking)
+        if(Input.GetKeyDown(KeyCode.Space) || IOManager.audioLevel > 90  && allowPictureTaking)
         {
             StartCoroutine(IOManager.instance.TakePhoto());
         }
@@ -90,7 +92,21 @@ public class Player : MonoBehaviour
             PopUpCheck();
         }
 
+        for (int i = 0; i < rayWidth; i++)
+        {
+            Vector3 pos = new Vector3(transform.position.x - rayWidth / 20 + (i * 0.1f), transform.position.y, transform.position.z);
+            RaycastHit2D hit = Physics2D.Raycast(pos, Vector2.up, 10);
+            Debug.DrawRay(pos, Vector3.up * 10, Color.blue, 1);
+            if (hit.collider != null)
+            {
+                if (hit.transform.CompareTag("Enemy"))
+                {
+                    Debug.Log("I hit an enemy!");
+                    Destroy(hit.transform.gameObject);
+                }
+            }
+        }
+
         anim.SetTrigger("Clap");
-        //Debug.Log("Clapping!");
     }
 }

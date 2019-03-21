@@ -65,6 +65,8 @@ public class IOManager : MonoBehaviour
             portThread.Start();
 
         StartCoroutine(StartGame());
+
+        Debug.Log(GetScreenBoundsInWorldSpace()[0] + " " + GetScreenBoundsInWorldSpace()[1]);
     }
 
     IEnumerator StartGame()
@@ -73,7 +75,7 @@ public class IOManager : MonoBehaviour
 
         for (int i = 0; i < GameManager.instance.lives.Length; i++)
         {
-            Debug.Log("editing light status");
+            //Debug.Log("editing light status");
             EditLedStatus(i + 1, false);
             yield return new WaitForSeconds(0.2f);
 
@@ -83,7 +85,7 @@ public class IOManager : MonoBehaviour
 
         for (int i = 0; i < GameManager.instance.lives.Length; i++)
         {
-            Debug.Log("moving through the lights to enable them");
+            //Debug.Log("moving through the lights to enable them");
             EditLedStatus(i + 1, true);
             yield return new WaitForSeconds(0.4f);
         }
@@ -155,7 +157,7 @@ public class IOManager : MonoBehaviour
 
         byte[] bytes = photo.EncodeToPNG();
         
-        File.WriteAllBytes(imagePath + '/' + DateTime.Now.ToString("h-mm-ss tt") + ".png", bytes);
+        File.WriteAllBytes(imagePath + '/' + DateTime.Now.ToString("HH-mm-ss-fff tt") + ".png", bytes);
     }
 
     private static void Read(object obj)
@@ -186,8 +188,21 @@ public class IOManager : MonoBehaviour
             light.b = int.Parse(ledValues[2]);
 
             instance.LEDLights.Add(light);
-            Debug.Log("Updating Light values!");
+            //Debug.Log("Updating Light values!");
         }
+    }
+
+    public static int[] GetScreenBoundsInWorldSpace()
+    {
+        int[] val = { 0, 0 };
+
+        int verticalExtent = (int)Camera.main.orthographicSize;
+        int horizontalExtent = verticalExtent * Screen.width / Screen.height;
+
+        val[0] = horizontalExtent;
+        val[1] = verticalExtent;
+
+        return val;
     }
 
     private void OnApplicationQuit()
