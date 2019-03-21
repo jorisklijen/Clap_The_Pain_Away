@@ -1,0 +1,60 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &2397756154049686227
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2397756154049686225}
+  - component: {fileID: 2397756154049686226}
+  m_Layer: 0
+  m_Name: PhaseManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2397756154049686225
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2397756154049686227}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 108.16445, y: 21.223572, z: -4.8473587}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2397756154049686226
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2397756154049686227}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e63ecd97852568d48a305353a3ec4ad2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  background: {fileID: 21300000, guid: 1cf09d20194bc0443864107ced1a862f, type: 3}
+  backgroundTransition: {fileID: 21300000, guid: 95e821c23c2b12943a854c1a928444a6,
+    type: 3}
+  scrollSpeed: 2.5
+  phases:
+  - backgroundColor: {r: 1, g: 0, b: 0, a: 1}
+    phaseDuration: 5
+  - backgroundColor: {r: 1, g: 0.2605207, b: 0, a: 1}
+    phaseDuration: 5
+  - backgroundColor: {r: 1, g: 0.4136189, b: 0, a: 1}
+    phaseDuration: 5
+  - backgroundColor: {r: 1, g: 0.6213611, b: 0, a: 1}
+    phaseDuration: 5
+  - backgroundColor: {r: 1, g: 0.868332, b: 0, a: 1}
+    phaseDuration: 5
