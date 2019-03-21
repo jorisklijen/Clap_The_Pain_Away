@@ -205,7 +205,7 @@ GameObject:
   - component: {fileID: 1185074566}
   - component: {fileID: 1185074565}
   m_Layer: 0
-  m_Name: GameObject
+  m_Name: PhaseManager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -220,17 +220,23 @@ MonoBehaviour:
   m_GameObject: {fileID: 1185074564}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c2f6da0aa16aa3c4dad01da18f950f3f, type: 3}
+  m_Script: {fileID: 11500000, guid: e63ecd97852568d48a305353a3ec4ad2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   background: {fileID: 21300000, guid: 1cf09d20194bc0443864107ced1a862f, type: 3}
   backgroundTransition: {fileID: 21300000, guid: 95e821c23c2b12943a854c1a928444a6,
     type: 3}
-  scrollSpeed: 100
+  scrollSpeed: 2.5
   phases:
-  - backgroundColor: {r: 0, g: 0.90434813, b: 1, a: 1}
-    phaseDuration: 5
   - backgroundColor: {r: 1, g: 0, b: 0, a: 1}
+    phaseDuration: 5
+  - backgroundColor: {r: 1, g: 0.2605207, b: 0, a: 1}
+    phaseDuration: 5
+  - backgroundColor: {r: 1, g: 0.4136189, b: 0, a: 1}
+    phaseDuration: 5
+  - backgroundColor: {r: 1, g: 0.6213611, b: 0, a: 1}
+    phaseDuration: 5
+  - backgroundColor: {r: 1, g: 0.868332, b: 0, a: 1}
     phaseDuration: 5
 --- !u!4 &1185074566
 Transform:
