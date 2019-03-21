@@ -10,6 +10,7 @@ public class Player : MonoBehaviour
     bool clapped;
     bool moved;
     [SerializeField] float desiredLevel = 70;
+    [SerializeField] bool allowPictureTaking;
 
     private void Start()
     {
@@ -19,9 +20,9 @@ public class Player : MonoBehaviour
 
     void PopUpCheck()
     {
-        if (moved && GameManager.instance.movePopup != null)
+        if (moved && GameManager.instance.movePopup != null && GameManager.instance.gameReady)
             Destroy(GameManager.instance.movePopup);
-        if (clapped && GameManager.instance.shootPopup != null)
+        if (clapped && GameManager.instance.shootPopup != null && GameManager.instance.gameReady)
             Destroy(GameManager.instance.shootPopup);
 
         if (clapped && moved)
@@ -57,6 +58,22 @@ public class Player : MonoBehaviour
         if(Input.GetKeyDown(KeyCode.J) || IOManager.audioLevel > desiredLevel && !clapped)
         {
             Clap();
+            RaycastHit2D hit = Physics2D.Raycast(transform.position, Vector2.up, 10);
+            if (hit.collider != null)
+            {
+                if (hit.transform.CompareTag("Enemy"))
+                {
+                    Debug.Log("I hit an enemy!");
+                    Destroy(hit.transform.gameObject);
+                }
+            }
+        }
+
+        Debug.DrawRay(transform.position, Vector3.up * 50, Color.blue, 1);
+
+        if(IOManager.audioLevel > 90 && allowPictureTaking)
+        {
+            StartCoroutine(IOManager.instance.TakePhoto());
         }
     }
 
@@ -68,8 +85,12 @@ public class Player : MonoBehaviour
     void Clap()
     {
         clapped = true;
-        PopUpCheck();
+        if(GameManager.instance.shootPopup)
+        {
+            PopUpCheck();
+        }
+
         anim.SetTrigger("Clap");
-        Debug.Log("Clapping!");
+        //Debug.Log("Clapping!");
     }
 }

@@ -20,8 +20,10 @@ public class IOManager : MonoBehaviour
     public static float distanceLeft;
     public static float distanceRight;
     public static float audioLevel;
+    [SerializeField] string imagePath;
 
     AudioClip microphoneInput;
+    WebCamTexture camTexture;
     float sensitivity;
     bool microphoneInitialised;
 
@@ -49,6 +51,10 @@ public class IOManager : MonoBehaviour
             microphoneInitialised = true;
         }
 
+        camTexture = new WebCamTexture();
+        camTexture.Play();
+
+
         //Debug.Log(portThread.ThreadState);
         port.RtsEnable = true;
         port.ReadTimeout = 700;
@@ -69,17 +75,17 @@ public class IOManager : MonoBehaviour
         {
             Debug.Log("editing light status");
             EditLedStatus(i + 1, false);
-            yield return new WaitForSeconds(0.1275f);
+            yield return new WaitForSeconds(0.2f);
 
         }
 
-        yield return new WaitForSeconds(1f);
+        yield return new WaitForSeconds(.5f);
 
         for (int i = 0; i < GameManager.instance.lives.Length; i++)
         {
             Debug.Log("moving through the lights to enable them");
             EditLedStatus(i + 1, true);
-            yield return new WaitForSeconds(0.3f);
+            yield return new WaitForSeconds(0.4f);
         }
 
         GameManager.instance.gameReady = true;
@@ -136,6 +142,20 @@ public class IOManager : MonoBehaviour
             port.Write(index + ", enable");
         if(!status)
             port.Write(index + ", disable");
+    }
+
+    public IEnumerator TakePhoto()
+    {
+
+        yield return new WaitForEndOfFrame();
+
+        Texture2D photo = new Texture2D(camTexture.width, camTexture.height);
+        photo.SetPixels(camTexture.GetPixels());
+        photo.Apply();
+
+        byte[] bytes = photo.EncodeToPNG();
+        
+        File.WriteAllBytes(imagePath + '/' + DateTime.Now.ToString("h-mm-ss tt") + ".png", bytes);
     }
 
     private static void Read(object obj)

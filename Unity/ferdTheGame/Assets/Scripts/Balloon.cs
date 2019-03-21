@@ -28,15 +28,21 @@ public class Balloon : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.gameObject.CompareTag("Enemey"))
+        if (collision.gameObject.CompareTag("Enemy"))
+        {
             anim.SetTrigger("Explode");
+        }
+    }
+
+    void SpawnVFX()
+    {
+        Instantiate(vfx, transform.position, Quaternion.identity);
     }
 
     void Die()
     {
         GameManager.instance.player.lives -= 1;
         IOManager.EditLedStatus(index, false);
-        Instantiate(vfx, transform.position, Quaternion.identity);
         //Time.timeScale += 0.1f;
         Destroy(gameObject);
     }

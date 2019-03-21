@@ -48,6 +48,5 @@ public class GameManager : MonoBehaviour
         GUI.Label(new Rect(10, 50, 300, 50), "Game Decibel level: " + IOManager.audioLevel);
         //GUI.Label(new Rect(10, 70, 300, 50), "Game Time: " + Time.time);
         GUI.Label(new Rect(10, 70, 1000, 50), "Receive value:" + IOManager.instance.readValue);
-
     }
 }
