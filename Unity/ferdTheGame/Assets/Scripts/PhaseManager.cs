@@ -117,12 +117,13 @@ public class PhaseManager : MonoBehaviour {
         for (int i = 0; i < bgInstances.Count; ++i) {
             if (bgInstances[i].transform.position.y < -10.0f) {
                 Destroy(bgInstances[i]);
-                bgInstances.RemoveAt(i);
 
                 // Add next bg, dirty check name if solid
                 if (bgInstances[i].name.Contains("Solid")) {
                     AddBgInstance();
                 }
+
+                bgInstances.RemoveAt(i);
             }
         }
 
