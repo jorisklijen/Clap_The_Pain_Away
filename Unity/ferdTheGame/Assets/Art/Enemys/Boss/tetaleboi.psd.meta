@@ -1,0 +1,199 @@
+fileFormatVersion: 2
+guid: 32cf666983ce88541bb828aaa9fb151d
+TextureImporter:
+  fileIDToRecycleName: {}
+  externalObjects: {}
+  serializedVersion: 9
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 0
+    aniso: -1
+    mipBias: -100
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 1
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  platformSettings:
+  - serializedVersion: 2
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+  - serializedVersion: 2
+    buildTarget: Standalone
+    maxTextureSize: 128
+    resizeAlgorithm: 0
+    textureFormat: 12
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 1
+    androidETC2FallbackOverride: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites: []
+    outline: []
+    physicsShape: []
+    bones:
+    - name: tentaklel1_1
+      position: {x: 44.761906, y: 87.89796, z: 0}
+      rotation: {x: 0, y: 0, z: 0.95036983, w: 0.3111225}
+      length: 4.9771433
+      parentId: -1
+    - name: tentaklel1_2
+      position: {x: 4.9771485, y: -0.0000068855566, z: 0}
+      rotation: {x: 0, y: 0, z: 0.022371197, w: 0.9997497}
+      length: 4.341381
+      parentId: 0
+    - name: tentaklel1_3
+      position: {x: 4.341374, y: -0.0000010892995, z: 0}
+      rotation: {x: 0, y: 0, z: 0.062137272, w: 0.9980676}
+      length: 4.1881943
+      parentId: 1
+    - name: tentaklel1_4
+      position: {x: 4.1881933, y: -0.00000032137314, z: 0}
+      rotation: {x: 0, y: 0, z: 0.027366089, w: 0.9996255}
+      length: 4.3742433
+      parentId: 2
+    - name: tentaklel1_5
+      position: {x: 4.3742447, y: 0.0000028819336, z: 0}
+      rotation: {x: 0, y: 0, z: 0.1453816, w: 0.98937565}
+      length: 4.5801234
+      parentId: 3
+    - name: tentaklel1_6
+      position: {x: 4.580123, y: -0.000000722998, z: 0}
+      rotation: {x: 0, y: 0, z: 0, w: 1}
+      length: 0.0000038146966
+      parentId: 4
+    - name: tentaklel1_7
+      position: {x: 0.000003907782, y: -0.00000027727663, z: 0}
+      rotation: {x: 0, y: 0, z: 0.08698537, w: 0.9962096}
+      length: 4.6901693
+      parentId: 5
+    - name: tentaklel1_8
+      position: {x: 4.6901684, y: 0.00000028840697, z: 0}
+      rotation: {x: 0, y: 0, z: 0.18116336, w: 0.98345304}
+      length: 4.2518125
+      parentId: 6
+    - name: tentaklel1_9
+      position: {x: 4.251815, y: 0.0000016558034, z: 0}
+      rotation: {x: 0, y: 0, z: 0.24758875, w: 0.9688652}
+      length: 4.8699107
+      parentId: 7
+    - name: tentaklel1_10
+      position: {x: 4.8699126, y: 0.0000028052955, z: 0}
+      rotation: {x: 0, y: 0, z: 0.13117827, w: 0.9913588}
+      length: 4.6209826
+      parentId: 8
+    - name: tentaklel1_11
+      position: {x: 4.6209807, y: 0.000001607606, z: 0}
+      rotation: {x: 0, y: 0, z: -0.37574816, w: 0.9267218}
+      length: 3.6541212
+      parentId: 9
+    - name: tentaklel1_12
+      position: {x: 3.6541197, y: -0.000006108761, z: 0}
+      rotation: {x: 0, y: 0, z: -0.2393364, w: 0.9709367}
+      length: 3.8890374
+      parentId: 10
+    - name: tentaklel1_13
+      position: {x: 3.8890371, y: -0.0000013556557, z: 0}
+      rotation: {x: 0, y: 0, z: -0.31783226, w: 0.948147}
+      length: 4.077749
+      parentId: 11
+    - name: Tentakel2_1
+      position: {x: 40.614513, y: 83.349205, z: 0}
+      rotation: {x: 0, y: 0, z: -0.9986721, w: 0.051517874}
+      length: 3.900522
+      parentId: -1
+    - name: Tentakel2_14
+      position: {x: 3.9005225, y: -0.000000030571982, z: 0}
+      rotation: {x: 0, y: 0, z: -0.0099694915, w: 0.9999503}
+      length: 3.2220097
+      parentId: 13
+    - name: Tentakel2_15
+      position: {x: 3.2220068, y: 0.00000063199775, z: 0}
+      rotation: {x: 0, y: 0, z: 0.17244387, w: 0.9850194}
+      length: 3.5320754
+      parentId: 14
+    - name: Tentakel2_16
+      position: {x: 3.532073, y: -0.000001152308, z: 0}
+      rotation: {x: 0, y: 0, z: -0.00981737, w: 0.99995184}
+      length: 3.3553574
+      parentId: 15
+    - name: Tentakel2_17
+      position: {x: 3.3553562, y: -0.00000074569834, z: 0}
+      rotation: {x: 0, y: 0, z: 0.56490916, w: 0.8251531}
+      length: 3.3473392
+      parentId: 16
+    - name: Tentakel2_18
+      position: {x: 3.3473315, y: -0.0000009899352, z: 0}
+      rotation: {x: 0, y: 0, z: 0.64668554, w: 0.7627567}
+      length: 3.2358718
+      parentId: 17
+    - name: Tentakel2_19
+      position: {x: 3.2358718, y: -0.000002856685, z: 0}
+      rotation: {x: 0, y: 0, z: -0.6618019, w: 0.74967885}
+      length: 0.000007629392
+      parentId: 18
+    spriteID: f092f638066bf9a4bbc52210deaef82d
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+  spritePackingTag: 
+  pSDRemoveMatte: 0
+  pSDShowRemoveMatteOption: 1
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
